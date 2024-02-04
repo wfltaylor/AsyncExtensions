@@ -136,7 +136,9 @@ public final class AsyncCurrentValueSubject<Element>: AsyncSubject where Element
       await withTaskCancellationHandler {
         await self.iterator.next()
       } onCancel: { [unregister] in
-        unregister()
+        Task {
+          unregister()
+        }
       }
     }
   }
